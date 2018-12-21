@@ -20,3 +20,7 @@
 	    $ ./place -aux <path/to/aux/file>
 	e.g
 	    $ ./place -aux benchmark/ibm01/ibm01-cu85.aux
+	
+9. Description :
+    Global Placement implemented by Analytical Approach
+    Only implemented objective value and gradients in GlobalPlacer.cpp and ExampleFunction.cpp
