@@ -52,16 +52,27 @@ void GlobalPlacer::place()
 	////////////////////////////////////////////////////////////////
 	
     const unsigned int num_modules = _placement.numModules();
-	// An example of random placement by TA. If you want to use it, please uncomment the folllwing 2 lines.
-	size_t seed;
-	if (num_modules == 12028)
+    // An example of random placement by TA. If you want to use it, please uncomment the folllwing 2 lines.
+    size_t seed;
+    unsigned int iters = 2;
+    if (num_modules == 12028)
         seed = 1545382299;
+    else if (num_modules == 19062)
+        seed = 1545406879;
     else if (num_modules == 29347)
         seed = 1545384383;
+    else if (num_modules == 44811) {
+        seed = 1545407982;
+        iters = 3;
+    }
+    else if (num_modules == 50672)
+        seed = 1545409352;
+    else if (num_modules == 51382)
+        seed = 1545411087;
     else
-	    seed = time(NULL);
-	srand(seed);
-	randomPlace(); 
+        seed = time(NULL);
+    srand(seed);
+    randomPlace();
 	
 	/* @@@ TODO 
 	 * 1. Understand above example and modify ExampleFunction.cpp to implement the analytical placement
@@ -87,8 +98,8 @@ void GlobalPlacer::place()
 
     ExampleFunction ef(_placement);
 
-    unsigned int iteration[] = {150, 35};
-    for (unsigned int iter = 0; iter < 2; iter++) {
+    unsigned int iteration[] = {150, 35, 35, 35};
+    for (unsigned int iter = 0; iter < iters; iter++) {
         ef.beta += iter * 2500;
         NumericalOptimizer no(ef);
         no.setX(x);
